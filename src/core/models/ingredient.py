@@ -8,7 +8,7 @@ from src.core.models.base import Base
 from src.core.models.mixins.int_id_pk import IntIdPkMixin
 
 if TYPE_CHECKING:
-    from .recipe import Recipe
+    from src.core.models.recipe import Recipe
 
 
 class Ingredient(IntIdPkMixin, Base):
@@ -26,7 +26,7 @@ class Ingredient(IntIdPkMixin, Base):
     def __repr__(self):
         return (
             f"Ingredient(id={self.id}, ingredient_name={self.ingredient_name},"
-            f"ingredient_description(id={self.ingredient_description}"
+            f"ingredient_description={self.ingredient_description})"
         )
 
 

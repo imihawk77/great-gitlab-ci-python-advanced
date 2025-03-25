@@ -8,7 +8,7 @@ from src.core.models.base import Base
 from src.core.models.mixins.int_id_pk import IntIdPkMixin
 
 if TYPE_CHECKING:
-    from .ingredient import Ingredient
+    from src.core.models.ingredient import Ingredient
 
 
 class Recipe(IntIdPkMixin, Base):
@@ -20,7 +20,7 @@ class Recipe(IntIdPkMixin, Base):
     cooking_time: Mapped[int] = mapped_column(default=5)
     views: Mapped[int] = mapped_column(default=0)
     recipe_description: Mapped[str] = mapped_column(
-        Text, default=""
+        Text, default="Здесь могла быть ваша реклама"
     )
 
     used_ingredients: Mapped[List["Ingredient"]] = relationship(
