@@ -1,4 +1,4 @@
-name: Work
+name: test
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
       - name: Run docker-compose
-        uses: hoverkraft-tech/compose-action@v2.0.1
+        uses: hovercraft-tech/compose-action@v2.0.1
         with:
           compose-file: "docker-compose.yml"
       #__________________________________
