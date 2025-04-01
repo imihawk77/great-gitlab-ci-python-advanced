@@ -44,7 +44,7 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "docker-compose.yml"
-      #__________________________________
+
       - name: Run tests
         run: |
           source .venv/bin/activate
