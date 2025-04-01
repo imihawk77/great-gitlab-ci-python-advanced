@@ -5,8 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.api.crud import ingredient as ingredient_crud
 from src.core.models.db_helper import db_helper
-from src.core.schemas.ingredient import IngredientRead, IngredientCreate
-
+from src.core.schemas.ingredient import IngredientCreate, IngredientRead
 
 ingredient_route = APIRouter()
 
@@ -17,10 +16,10 @@ ingredient_route = APIRouter()
     response_model=List[IngredientRead],
 )
 async def get_all_ingredients(
-        session:Annotated[
-            AsyncSession,
-            Depends(db_helper.session_getter),
-        ],
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
 ):
     ingredients = await ingredient_crud.get_all_ingredients(session=session)
     return ingredients
@@ -32,11 +31,11 @@ async def get_all_ingredients(
     response_model=IngredientRead,
 )
 async def add_new_ingredient(
-        session: Annotated[
-            AsyncSession,
-            Depends(db_helper.session_getter),
-        ],
-        ingredient_data: IngredientCreate,
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+    ingredient_data: IngredientCreate,
 ):
     ingredient = await ingredient_crud.create_ingredient(
         session=session,

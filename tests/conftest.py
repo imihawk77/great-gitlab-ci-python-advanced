@@ -15,9 +15,7 @@ from src.core.models.ingredients_in_recipe import IngredientsInRecipe
 from src.main import main_app
 
 DATABASE_URL_TEST = "postgresql+asyncpg://user:password@localhost:5433/recipes"
-engine_test = create_async_engine(
-    DATABASE_URL_TEST, poolclass=NullPool, echo=True
-)
+engine_test = create_async_engine(DATABASE_URL_TEST, poolclass=NullPool, echo=True)
 async_session = async_sessionmaker(bind=engine_test, expire_on_commit=False)
 
 
@@ -26,9 +24,7 @@ async def override_get_async_session() -> AsyncGenerator[AsyncSession, None]:
         yield session
 
 
-main_app.dependency_overrides[db_helper.session_getter] =(
-    override_get_async_session
-)
+main_app.dependency_overrides[db_helper.session_getter] = override_get_async_session
 client = TestClient(main_app)
 
 ingredients = [

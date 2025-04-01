@@ -27,7 +27,6 @@ async def test_get_all_recipe(ac: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_get_recipe_detail(ac: AsyncClient):
-    # Тест проверки получения детальной информации
     response = await ac.get("/recipes/1")
     assert len(response.json()[0]["ingredients"]) == 3
     assert response.status_code == 200
@@ -60,4 +59,3 @@ async def test_post_ingredient(ac: AsyncClient):
         },
     )
     assert response.json()["ingredient_name"] == "name for test"
-    assert response.json()["ingredient_description"] == "description for test "

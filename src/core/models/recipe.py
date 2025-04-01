@@ -1,8 +1,7 @@
 from typing import TYPE_CHECKING, List
 
 from sqlalchemy import String, Text
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.core.models.base import Base
 from src.core.models.mixins.int_id_pk import IntIdPkMixin

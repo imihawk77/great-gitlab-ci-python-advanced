@@ -6,8 +6,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.core.models import Ingredient, IngredientsInRecipe, Recipe
 from src.core.schemas.recipe import RecipeCreate
 
+
 async def get_all_recipes(
-        session: AsyncSession,
+    session: AsyncSession,
 ) -> Sequence[Recipe]:
     stmt = select(Recipe).order_by(Recipe.id)
     result = await session.scalars(stmt)
@@ -15,14 +16,12 @@ async def get_all_recipes(
 
 
 async def get_recipe_by_id(session: AsyncSession, recipe_id: int):
-    result = await session.execute(
-        select(Recipe).filter(Recipe.id == recipe_id)
-    )
-    result_2 = await  session.execute(
+    result = await session.execute(select(Recipe).filter(Recipe.id == recipe_id))
+    result_2 = await session.execute(
         select(
             IngredientsInRecipe.quantity,
             Ingredient.ingredient_name,
-            Ingredient.ingredient_description
+            Ingredient.ingredient_description,
         )
         .join(Ingredient, Ingredient.id == IngredientsInRecipe.ingredient_id)
         .where(IngredientsInRecipe.recipe_id == recipe_id)
@@ -32,7 +31,7 @@ async def get_recipe_by_id(session: AsyncSession, recipe_id: int):
     ingredients = result_2.fetchall()
 
     recipe.views += 1
-    await  session.commit()
+    await session.commit()
 
     recipe_with_ingredients = [
         {
@@ -49,15 +48,14 @@ async def get_recipe_by_id(session: AsyncSession, recipe_id: int):
                 }
                 for i in ingredients
             ],
-
         },
     ]
     return recipe_with_ingredients
 
 
 async def create_recipe(
-        session: AsyncSession,
-        recipe_create: RecipeCreate,
+    session: AsyncSession,
+    recipe_create: RecipeCreate,
 ) -> Recipe:
     data = recipe_create.model_dump()
     recipe = Recipe(
@@ -65,7 +63,6 @@ async def create_recipe(
         cooking_time=data["cooking_time"],
         views=data["views"],
         recipe_description=data["recipe_description"],
-
     )
     session.add(recipe)
     await session.flush()

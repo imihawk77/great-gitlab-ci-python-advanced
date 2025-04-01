@@ -43,25 +43,23 @@ def upgrade() -> None:
         sa.Column("recipe_id", sa.Integer(), nullable=False),
         sa.Column("ingredient_id", sa.Integer(), nullable=False),
         sa.Column("quantity", sa.String(length=100), nullable=True),
-        sa.Column("id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["ingredient_id"],
             ["ingredients.id"],
             name=op.f("fk_ingredients_in_recipes_ingredient_id_ingredients"),
-            ondelete="CASCADE"
+            ondelete="CASCADE",
         ),
         sa.ForeignKeyConstraint(
             ["recipe_id"],
             ["recipes.id"],
             name=op.f("fk_ingredients_in_recipes_recipe_id_recipes"),
-            ondelete="CASCADE"
+            ondelete="CASCADE",
         ),
         sa.PrimaryKeyConstraint(
             "recipe_id",
             "ingredient_id",
             name=op.f("pk_ingredients_in_recipes"),
         ),
-
     )
     # ### end Alembic commands ###
 

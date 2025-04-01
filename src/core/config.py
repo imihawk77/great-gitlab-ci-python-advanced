@@ -1,10 +1,10 @@
 from pathlib import Path
-from pydantic import BaseModel
-from pydantic import PostgresDsn
+
+from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
@@ -30,10 +30,10 @@ class DatabaseConfig(BaseModel):
         "pk": "pk_%(table_name)s",
     }
 
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=(
-            BASE_DIR / ".env"),
+        env_file=(".env", ".template.env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="APP_CONFIG__",
@@ -41,8 +41,6 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
-
-
 
 
 settings = Settings()

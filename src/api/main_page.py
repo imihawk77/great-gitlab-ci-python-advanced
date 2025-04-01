@@ -1,5 +1,7 @@
 from fastapi import APIRouter
+
 from src.core.schemas.main_page import MainBase
+
 main_route = APIRouter()
 
 
