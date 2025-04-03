@@ -35,21 +35,24 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no interaction --no-root
+
       - name: Install project
         run: poetry install --no-interaction
+
       - name: Run docker-compose
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
-          compose-file: "docker-compose.yml"
+          compose-file: "docker-compose.yaml"
 
       - name: Run tests
         run: |
           source .venv/bin/activate
           python -m pytest
-      #__________________________________
+
       - name: Run mypy
         run: |
           source .venv/bin/activate
