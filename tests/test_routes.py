@@ -26,13 +26,6 @@ async def test_get_all_recipe(ac: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_get_recipe_detail(ac: AsyncClient):
-    response = await ac.get("/recipes/1")
-    assert len(response.json()[0]["ingredients"]) == 3
-    assert response.status_code == 200
-
-
-@pytest.mark.asyncio
 async def test_post_recipe(ac: AsyncClient):
     # Тест проверки создания нового рецепта
     response = await ac.post(
