@@ -14,7 +14,7 @@ from src.core.models.recipe import Recipe
 from src.core.models.ingredients_in_recipe import IngredientsInRecipe
 from src.main import main_app
 
-DATABASE_URL_TEST = "postgresql+asyncpg://user:password@localhost:5433/recipes"
+DATABASE_URL_TEST = "postgresql+asyncpg://user:password@localhost:5432/recipes"
 engine_test = create_async_engine(DATABASE_URL_TEST, poolclass=NullPool, echo=True)
 async_session = async_sessionmaker(bind=engine_test, expire_on_commit=False)
 
