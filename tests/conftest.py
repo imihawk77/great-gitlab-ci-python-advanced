@@ -63,7 +63,7 @@ ingredients_to_recipes = [
 ]
 
 
-@pytest_asyncio.fixture(autouse=True, scope="session")
+@pytest_asyncio.fixture(autouse=True, scope="session" )
 async def prepare_database():
     async with engine_test.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
