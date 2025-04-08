@@ -16,7 +16,9 @@ async def get_all_recipes(
 
 
 async def get_recipe_by_id(session: AsyncSession, recipe_id: int):
-    result = await session.execute(select(Recipe).filter(Recipe.id == recipe_id))
+    result = await session.execute(
+        select(Recipe).filter(Recipe.id == recipe_id)
+    )
     result_2 = await session.execute(
         select(
             IngredientsInRecipe.quantity,
