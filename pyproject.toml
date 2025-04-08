@@ -30,7 +30,7 @@ ensure_newline_before_comments = true
 line-length = 79
 
 [tool.mypy]
-plugins = ["pydantic.mypy"]
+plugins = ["pydantic.mypy" ]
 follow_imports = "skip"
 
 [tool.pytest.init_options]
