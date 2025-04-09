@@ -8,7 +8,6 @@ from src.api.ingredient import ingredient_route
 from src.api.main_page import main_route
 from src.api.recipes import recipe_route
 from src.core.config import settings
-from src.core.models import Base
 from src.core.models.db_helper import db_helper
 
 
